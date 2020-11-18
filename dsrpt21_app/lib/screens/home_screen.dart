@@ -15,6 +15,10 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+/*
+      FALTA UM AJUSTE NO DROPDOWN e a chamada da API, claro
+*/
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
