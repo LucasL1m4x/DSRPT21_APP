@@ -5,6 +5,8 @@ class LinhaDeRobosModel {
   String nome;
   int numero;
   String esquema;
+  String profissao;
+  List<String> caracteristicas;
   double statusProducao;
 
   LinhaDeRobosModel({
@@ -12,6 +14,8 @@ class LinhaDeRobosModel {
     this.nome,
     this.numero,
     this.esquema,
+    this.profissao,
+    this.caracteristicas,
     this.statusProducao,
   });
 
@@ -26,6 +30,8 @@ class LinhaDeRobosModel {
         nome: json["nome"],
         numero: json["numero"],
         esquema: json["esquema"],
+        profissao: json["profissao"],
+        caracteristicas: json["caracteristicas"],
         statusProducao: json["statusProducao"].toDouble(),
       );
 
@@ -34,6 +40,8 @@ class LinhaDeRobosModel {
         "nome": nome,
         "numero": numero,
         "esquema": esquema,
+        "profissao": profissao,
+        "caracteristicas": caracteristicas,
         "statusProducao": statusProducao,
       };
 }
