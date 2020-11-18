@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:dsrpt21_app/models/linha_de_robos_model.dart';
+import 'package:dsrpt21_app/screens/final_screen.dart';
 
 const DOIS_PI = 3.14 * 2;
 const kBlueColor = Color.fromRGBO(16, 38, 228, .9);
@@ -8,9 +10,15 @@ class ProgressScreen extends StatefulWidget {
   _ProgressScreenState createState() => _ProgressScreenState();
 }
 
+/*
+    ONDE TEM O NÚMERO 4 É A VARIÁVEL linhaRobos.numero mas como ainda nao esta funcionando coloquei 4 para testar
+    TEM no seconds do Duration, nos ifs e no texto que informa a produção 
+*/
+
 class _ProgressScreenState extends State<ProgressScreen> {
   @override
   Widget build(BuildContext context) {
+    LinhaDeRobosModel linhaRobos = LinhaDeRobosModel();
     final size = 200.0;
     return SafeArea(
       child: Scaffold(
@@ -21,9 +29,34 @@ class _ProgressScreenState extends State<ProgressScreen> {
         body: Center(
           child: TweenAnimationBuilder(
             tween: Tween(begin: 0.0, end: 1.0),
-            duration: Duration(seconds: 5),
+            duration: Duration(seconds: 5 * 4),
+            onEnd: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FinalScreen(),
+                ),
+              );
+            },
             builder: (context, value, child) {
               int percentage = (value * 100).ceil();
+              double num = 0;
+              if (percentage <= 25) {
+                num = 4 * 0.25;
+              } else {
+                if (percentage <= 50) {
+                  num = 4 * 0.5;
+                } else {
+                  if (percentage <= 75) {
+                    num = 4 * 0.75;
+                  } else {
+                    if (percentage <= 100) {
+                      num = 4 * 1.0;
+                    }
+                  }
+                }
+              }
+              int numInt = num.toInt();
               return Container(
                 width: size,
                 height: size,
@@ -64,11 +97,11 @@ class _ProgressScreenState extends State<ProgressScreen> {
                     ),
                     Positioned(
                       child: Text(
-                        "OO I OO",
+                        "Robô ${numInt} de 4, sendo feito",
                         style: TextStyle(fontSize: 25, color: kBlueColor),
                       ),
                       top: -75,
-                      left: 55,
+                      left: -20,
                     ),
                   ],
                   overflow: Overflow.visible,
