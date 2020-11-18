@@ -10,6 +10,9 @@ class FinalScreen extends StatefulWidget {
   @override
   _FinalScreenState createState() => _FinalScreenState();
 }
+/*
+    NESTA TELA FALTA CHAMAR OS MÉTODOS QUE ENVIAM OS DADOS PARA A API e colocar o nome e numero(que tambem vem da API)
+*/
 
 class _FinalScreenState extends State<FinalScreen> {
   bool carac1 = false, carac2 = false, carac3 = false, carac4 = false;
