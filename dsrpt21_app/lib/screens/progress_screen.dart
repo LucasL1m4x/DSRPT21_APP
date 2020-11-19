@@ -1,3 +1,4 @@
+import 'package:dsrpt21_app/services/linha_de_robos_service.dart';
 import 'package:flutter/material.dart';
 import 'package:dsrpt21_app/models/linha_de_robos_model.dart';
 import 'package:dsrpt21_app/screens/final_screen.dart';
@@ -9,11 +10,6 @@ class ProgressScreen extends StatefulWidget {
   @override
   _ProgressScreenState createState() => _ProgressScreenState();
 }
-
-/*
-    ONDE TEM O NÚMERO 4 É A VARIÁVEL linhaRobos.numero mas como ainda nao esta funcionando coloquei 4 para testar
-    TEM no seconds do Duration, nos ifs e no texto que informa a produção 
-*/
 
 class _ProgressScreenState extends State<ProgressScreen> {
   @override
