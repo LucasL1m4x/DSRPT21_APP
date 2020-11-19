@@ -1,3 +1,4 @@
+import 'package:dsrpt21_app/services/linha_de_robos_service.dart';
 import 'package:flutter/material.dart';
 import 'package:dsrpt21_app/models/linha_de_robos_model.dart';
 
@@ -10,9 +11,17 @@ class FinalScreen extends StatefulWidget {
   @override
   _FinalScreenState createState() => _FinalScreenState();
 }
-/*
-    NESTA TELA FALTA CHAMAR OS MÉTODOS QUE ENVIAM OS DADOS PARA A API e colocar o nome e numero(que tambem vem da API)
-*/
+
+createAlertDialog(BuildContext context) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Robô(s) construído(s) com sucesso"),
+          content: Text("Nome do(s) robô(s): "),
+        );
+      });
+}
 
 class _FinalScreenState extends State<FinalScreen> {
   bool carac1 = false, carac2 = false, carac3 = false, carac4 = false;
@@ -32,14 +41,14 @@ class _FinalScreenState extends State<FinalScreen> {
           Container(
             padding: EdgeInsets.only(top: 20, left: 15, right: 10),
             child: Text(
-              "Nome da linha de robôs: ",
+              "Nome da linha de robôs: ${linhaRobos.nome}",
               style: TextStyle(fontSize: 17),
             ),
           ),
           Container(
             padding: EdgeInsets.only(top: 10, left: 15, right: 10),
             child: Text(
-              "Número de robôs: ",
+              "Número de robôs: ${linhaRobos.numero}",
               style: TextStyle(fontSize: 17),
             ),
           ),
@@ -158,7 +167,13 @@ class _FinalScreenState extends State<FinalScreen> {
                     ],
                   ),
                   onPressed: () {
-                    setState(() {});
+                    setState(() {
+                      linhaRobos = LinhaDeRobosModel(
+                        profissao: profissaoC.text,
+                      );
+                    });
+                    //LinhaDeRobosService().update(linhaRobos);
+                    createAlertDialog(context);
                   },
                 ),
               ),
