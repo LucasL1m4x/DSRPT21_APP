@@ -1,13 +1,12 @@
+import 'dart:io';
+
 import 'package:dsrpt21_app/screens/progress_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dsrpt21_app/services/linha_de_robos_service.dart';
 import 'package:dsrpt21_app/models/linha_de_robos_model.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
-const kDefaultShadow = BoxShadow(
-  offset: Offset(0, 15),
-  blurRadius: 27,
-  color: Colors.black12,
-);
 const kBlueColor = Color.fromRGBO(16, 38, 228, .9);
 
 class HomeScreen extends StatefulWidget {
@@ -15,24 +14,20 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-/*
-      FALTA UM AJUSTE NO DROPDOWN e a chamada da API, claro
-*/
-
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController nameC = TextEditingController();
+  final TextEditingController numberC = TextEditingController();
+  final TextEditingController esquemaC = TextEditingController();
+  LinhaDeRobosModel linhaRobos = LinhaDeRobosModel();
+  File _image;
+
   @override
   void initState() {
     super.initState();
   }
 
-  final TextEditingController nameC = TextEditingController();
-  final TextEditingController numberC = TextEditingController();
-  final TextEditingController esquemaC = TextEditingController();
-  LinhaDeRobosModel linhaRobos = LinhaDeRobosModel();
-  //LinhaDeRobosService serviceRobos = LinhaDeRobosService();
   @override
   Widget build(BuildContext context) {
-    var dropdownValue;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBlueColor,
@@ -90,34 +85,15 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 30,
             ),
-            new DropdownButton<String>(
-              value: dropdownValue,
-              icon: Icon(
-                Icons.arrow_downward,
+            Container(
+              child: RaisedButton(
                 color: kBlueColor,
+                onPressed: () {
+                  //PickImage();
+                },
+                child: Text("Escolher esquema de construção",
+                    style: TextStyle(color: Colors.white)),
               ),
-              iconSize: 24,
-              elevation: 16,
-              underline: Container(
-                height: 1,
-                color: kBlueColor,
-              ),
-              onChanged: (String newValue) {
-                setState(() {
-                  linhaRobos.esquema = newValue;
-                });
-              },
-              items: <String>[
-                '                                                         Esquema 1',
-                '                                                         Esquema 2',
-                '                                                         Esquema 3',
-                '                                                         Esquema 4'
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
             ),
             SizedBox(
               height: 40,
@@ -170,5 +146,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  void PickImage() async {
+    // ignore: deprecated_member_use
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
   }
 }
