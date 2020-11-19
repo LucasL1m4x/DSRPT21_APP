@@ -4,9 +4,9 @@ import 'package:dsrpt21_app/services/Service_config.dart';
 
 class LinhaDeRobosService {
   static final String _endpoint =
-      "https://5fac44b503a60500167e7be2.mockapi.io/DSRPT21_APP";
+      "https://5fac44b503a60500167e7be2.mockapi.io/fiap";
 
-  static final String _resource = 'teste';
+  static final String _resource = 'linhaDeRobos';
 
   final ServiceConfig service = new ServiceConfig(_endpoint);
 
