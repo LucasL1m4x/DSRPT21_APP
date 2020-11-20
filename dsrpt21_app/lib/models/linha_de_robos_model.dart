@@ -6,7 +6,7 @@ class LinhaDeRobosModel {
   int numero;
   String esquema;
   String profissao;
-  List<String> caracteristicas;
+  List<String> caracteristicas = [];
   double statusProducao;
 
   LinhaDeRobosModel({

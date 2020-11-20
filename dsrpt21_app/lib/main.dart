@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
-        '/progress_screen': (context) => ProgressScreen(),
-        '/final_screen': (context) => FinalScreen()
+        '/progress_screen': (context) => ProgressScreen('', 0, ''),
+        '/final_screen': (context) => FinalScreen('', 0, '')
       },
     );
   }

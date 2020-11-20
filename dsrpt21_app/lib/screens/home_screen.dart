@@ -17,13 +17,29 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController nameC = TextEditingController();
   final TextEditingController numberC = TextEditingController();
-  final TextEditingController esquemaC = TextEditingController();
   LinhaDeRobosModel linhaRobos = LinhaDeRobosModel();
   File _image;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  Future getImage() async {
+    final image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
+  }
+
+  createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Selecione um esquema para poder continuar!"),
+          );
+        });
   }
 
   @override
@@ -89,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: RaisedButton(
                 color: kBlueColor,
                 onPressed: () {
-                  //PickImage();
+                  getImage();
                 },
                 child: Text("Escolher esquema de construção",
                     style: TextStyle(color: Colors.white)),
@@ -97,6 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(
               height: 40,
+              child: Text(
+                  "O sistema só funcionará após a seleção do esquema de construção(imagem)"),
             ),
             Container(
               height: 60,
@@ -124,20 +142,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   onPressed: () {
+                    int n = int.parse(numberC.text);
+                    String caminho = _image.path;
                     setState(() {
                       linhaRobos = LinhaDeRobosModel(
                           nome: nameC.text,
                           numero: int.parse(numberC.text),
-                          esquema: esquemaC.text,
+                          esquema: caminho,
                           statusProducao: 0);
                     });
-                    LinhaDeRobosService().create(linhaRobos);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProgressScreen(),
+                        builder: (context) =>
+                            ProgressScreen(nameC.text, n, caminho),
                       ),
                     );
+                    LinhaDeRobosService().create(linhaRobos);
                   },
                 ),
               ),
@@ -146,13 +167,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-
-  void PickImage() async {
-    // ignore: deprecated_member_use
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = image;
-    });
   }
 }

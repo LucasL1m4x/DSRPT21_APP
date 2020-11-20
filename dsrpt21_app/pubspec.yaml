@@ -12,10 +12,15 @@ dependencies:
     sdk: flutter
   dio: ^3.0.10
   path_provider: ^1.4.5
+  image_picker: ^0.6.7+14
+  mobx:
+  flutter_mobx:
 
   cupertino_icons: ^0.1.3
 
 dev_dependencies:
+  mobx_codegen:
+  build_runner:
   flutter_test:
     sdk: flutter
 
